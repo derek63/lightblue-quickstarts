@@ -3,7 +3,7 @@
 # This file intead to make easier the use of the enviroment variables (especially for the first time or single use. The user might also set the enviroment variable by his one on the current shell so the rake will be able to work fine
 
 echo "Checking missing files to run the script"
-sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet # You can remove this line later
+sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet # You can remove this line later. ALso, you can choose to not install puppet if you don't want the git hook validation
 
 echo "Please enter the path to the PEM file to access the aws's ec2 instance (hit enter for default, ~/.ssh/soa.pem):"
 read    PATH_PEM_KEY
