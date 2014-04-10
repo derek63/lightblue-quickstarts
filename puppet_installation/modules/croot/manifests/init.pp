@@ -4,7 +4,6 @@ class croot {
     mode   => '0755',
   }
 }
-
 define croot::check {
   exec { 'Check root grant': 
     command => '$(id -u)',

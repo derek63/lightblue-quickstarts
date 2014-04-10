@@ -36,7 +36,7 @@ task :setup do
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
     rm -rf lightblue-quickstarts && \
     git clone #{REPOSITORY} lightblue-quickstarts && \
-    sudo puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/manifests/site.pp
+    sudo puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules/lightblue/manifests/site.pp
 COMMANDS
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} '#{commands}'"
   puts "The client is fully working! You can now checkusing its ip: #{REMOTE_TARGET} "

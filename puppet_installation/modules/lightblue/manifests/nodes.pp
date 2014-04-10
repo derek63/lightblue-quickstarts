@@ -3,6 +3,6 @@ node default {
     RedHat  : { $supported = true }
     default : { fail("The ${module_name} module is not supported on ${::osfamily} based systems") }
   }
-  include root_grant
+  include croot
   include puppet
 }

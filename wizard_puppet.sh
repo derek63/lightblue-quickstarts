@@ -35,5 +35,14 @@ export RHN_USER
 export RHN_PASS
 
 
+
 # Default (no-arguments) rake program will process the Rakefile
-rake --trace
+rake
+
+
+echo "!"
+echo "!!!"
+echo "Use the following command to set up the environment variables for next time and the command 'rake'"
+echo "export PATH_PEM_KEY='$PATH_PEM_KEY'; && export REMOTE_TARGET='$REMOTE_TARGET'; && export REMOTE_USER='$REMOTE_USER'; && export HOSTNAME='$HOSTNAME'; && export RHN_USER='$RHN_USER'; && export RHN_PASS='$RHN_PASS'"
+echo "!!!"
+echo "!"
