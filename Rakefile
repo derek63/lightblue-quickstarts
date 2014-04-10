@@ -40,6 +40,9 @@ task :setup do
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
     rm -rf lightblue-quickstarts && \
     git clone #{REPOSITORY} lightblue-quickstarts && \
+    sed -in 's/FRHN_USER/#{RHN_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb       && \
+    sed -in 's/FRHN_PASS/#{RHN_PASS}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb       && \
+    sed -in 's/FREMOTE_USER/#{REMOTE_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb && \
     sudo -E puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules/lightblue/manifests/site.pp
 COMMANDS
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} '#{commands}'"
