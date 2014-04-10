@@ -21,11 +21,11 @@ read -s RHN_PASS
 
 
 PATH_PEM_KEY=${PATH_PEM_KEY:-"~/.ssh/soa.pem"}
-REMOTE_TARGET=${REMOTE_TARGET:-"54.187.7.27"} # You can add your default IP here
+#REMOTE_TARGET=${REMOTE_TARGET:-""} # You can add your default IP here
 REMOTE_USER=${REMOTE_USER:-"ec2-user"}
 HOSTNAME=${HOSTNAME:-"lightblue-dev"}
-RHN_USER=${RHN_USER:-"a"}           # You can add your default rhn user here
-RHN_PASS=${RHN_PASS:-"b"}           # You can add your default rhn pass here
+#RHN_USER=${RHN_USER:-""}           # You can add your default rhn user here
+#RHN_PASS=${RHN_PASS:-""}           # You can add your default rhn pass here
 
 export PATH_PEM_KEY
 export REMOTE_TARGET

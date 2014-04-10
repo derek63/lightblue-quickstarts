@@ -32,7 +32,7 @@ task :setup do
     echo export RHN_USER=#{RHN_USER} | tee -a ~/.bash_profile && \
     echo export RHN_PASS=#{RHN_PASS} | tee -a ~/.bash_profile && \
     source ~/.bash_profile && \
-    ( sudo yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm || true ) && \
+    { sudo yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm || true }&& \
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
     rm -rf lightblue-quickstarts && \
     git clone #{REPOSITORY} lightblue-quickstarts && \
