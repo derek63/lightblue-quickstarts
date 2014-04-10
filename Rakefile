@@ -19,7 +19,7 @@ task :default => [:setup] #You may add :add_hooks if you have puppet. By default
 desc "Update the target: ENV['REMOTE_USER']"
 task :apply do
   sh "git push"
-  sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} pull-updates"
+  sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} update_quickstarts"
 end
 
 
