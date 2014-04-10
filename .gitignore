@@ -27,3 +27,4 @@ target/*
 www/*/src/main/webapp/gwt
 www/www-app/*/src/main/webapp/gwt
 .idea
+*~
