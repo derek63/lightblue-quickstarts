@@ -1,6 +1,6 @@
 class croot {
   file { '/usr/local/bin/croot':
-    source => 'puppet://modules/puppet/croot.sh',
+    source => 'puppet:///modules/croot/croot.sh',
     mode   => '0755',
   }
 }
