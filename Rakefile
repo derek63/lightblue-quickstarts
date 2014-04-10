@@ -32,12 +32,15 @@ task :setup do
     echo export FACTER_RHN_USER=#{RHN_USER}       | sudo tee -a /root/.bash_profile >/dev/null && \
     echo export FACTER_RHN_PASS=#{RHN_PASS}       | sudo tee -a /root/.bash_profile >/dev/null && \
     echo export FACTER_REMOTE_USER=#{REMOTE_USER} | sudo tee -a /root/.bash_profile >/dev/null && \
+    echo export FACTER_RHN_USER=#{RHN_USER}       | sudo tee -a     ~/.bash_profile >/dev/null && \
+    echo export FACTER_RHN_PASS=#{RHN_PASS}       | sudo tee -a     ~/.bash_profile >/dev/null && \
     echo export FACTER_REMOTE_USER=#{REMOTE_USER} | sudo tee -a     ~/.bash_profile >/dev/null && \
+    source ~/.bash_profile && \
     ( sudo yum -y install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm || true ) && \
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
     rm -rf lightblue-quickstarts && \
     git clone #{REPOSITORY} lightblue-quickstarts && \
-    sudo puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules/lightblue/manifests/site.pp
+    sudo -E puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules/lightblue/manifests/site.pp
 COMMANDS
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} '#{commands}'"
   puts "The client is fully working! You can now checkusing its ip: #{REMOTE_TARGET} "
