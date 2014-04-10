@@ -1,5 +1,9 @@
 class puppet {
-  package { 'vim':
+  package { 'vim-enhanced':
+    ensure => installed,
+  }
+#test:
+  package { 'java-1.7.0-openjdk-devel':
     ensure => installed,
   }
   file { '/usr/local/bin/papply':
