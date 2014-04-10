@@ -10,7 +10,10 @@ class rhn (
   }
 
   if ($rhn::username == undef or $rhn::password == undef) and $rhn::activationkey == undef {
-    fail('Need the user and password (or activation key) to register into rhn. $rhn::username  ${rhn::username} // ${rhn::password} // ${rhn::activationkey}')
+    notice("The \$rhn::username value is: ${rhn::username}")
+    notice("The \$rhn::password value is: ${rhn::password}")
+    notice("The \$rhn::activationkey value is: ${rhn::activationkey}")
+    fail('Need the user and password (or activation key) to register into rhn.')
   }
 
   $rhn_userpass = $rhn::username ? {
