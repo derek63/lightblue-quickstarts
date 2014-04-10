@@ -29,8 +29,9 @@ task :setup do
   commands = <<COMMANDS
     sudo hostname #{HOSTNAME} && \
     echo #{HOSTNAME} | sudo tee /etc/hostname && \
-    echo export RHN_USER=#{RHN_USER} | tee -a ~/.bash_profile && \
-    echo export RHN_PASS=#{RHN_PASS} | tee -a ~/.bash_profile && \
+    echo export FACTER_RHN_USER=#{RHN_USER} | tee -a ~/.bash_profile && \
+    echo export FACTER_RHN_PASS=#{RHN_PASS} | tee -a ~/.bash_profile && \
+    echo export FACTER_REMOTE_USER=#{REMOTE_USER} | tee -a ~/.bash_profile && \
     source ~/.bash_profile && \
     ( sudo yum -y install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm || true ) && \
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \

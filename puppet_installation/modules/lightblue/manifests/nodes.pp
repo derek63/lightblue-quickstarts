@@ -5,4 +5,5 @@ node default {
   }
   include croot
   include puppet
+  include rhn
 }
