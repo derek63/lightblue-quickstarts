@@ -12,7 +12,7 @@ RHN_PASS     = ENV['RHN_PASS']
 
 
 
-task :default => [:setup, :add_hooks] # By default, those are the tasks to run if no argumetn is specificed 
+task :default => [:setup] #You may add :add_hooks if you have puppet. By default, those are the tasks to run if no argumetn is specificed 
 
 
 

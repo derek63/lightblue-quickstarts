@@ -3,7 +3,7 @@
 # This file intead to make easier the use of the enviroment variables (especially for the first time or single use. The user might also set the enviroment variable by his one on the current shell so the rake will be able to work fine
 
 echo "Checking missing files to run the script"
-sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet # You can remove this line later. ALso, you can choose to not install puppet if you don't want the git hook validation
+sudo yum -y install gcc ruby ruby-devel rubygems rake git # You can remove this line later. ALso, you can choose to not install puppet if you want the git hook validation
 
 echo "Please enter the path to the PEM file to access the aws's ec2 instance (hit enter for default, ~/.ssh/soa.pem):"
 read    PATH_PEM_KEY
@@ -40,9 +40,9 @@ export RHN_PASS
 rake
 
 
-echo "!"
-echo "!!!"
+echo "!!!!!!!!!!!!!!"
+echo ""
 echo "Use the following command to set up the environment variables for next time and the command 'rake'"
-echo "export PATH_PEM_KEY='$PATH_PEM_KEY'; && export REMOTE_TARGET='$REMOTE_TARGET'; && export REMOTE_USER='$REMOTE_USER'; && export HOSTNAME='$HOSTNAME'; && export RHN_USER='$RHN_USER'; && export RHN_PASS='$RHN_PASS'"
-echo "!!!"
-echo "!"
+echo "export PATH_PEM_KEY='$PATH_PEM_KEY' && export REMOTE_TARGET='$REMOTE_TARGET' && export REMOTE_USER='$REMOTE_USER' && export HOSTNAME='$HOSTNAME' && export RHN_USER='$RHN_USER' && export RHN_PASS='$RHN_PASS'"
+echo ""
+echo "!!!!!!!!!!!!!!"
