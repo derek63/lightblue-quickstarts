@@ -1,5 +1,5 @@
 class puppet {
-  package { 'vim-puppet':
+  package { 'vim':
     ensure => installed,
   }
   file { '/usr/local/bin/papply':
