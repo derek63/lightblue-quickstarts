@@ -7,7 +7,7 @@ node default {
   include puppet
   class { 'rhn':
     username => $::RHN_USER,
-    username => $::RHN_PASS,
+    password => $::RHN_PASS,
     force    => true,
   }
 }
