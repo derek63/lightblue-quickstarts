@@ -1,2 +1,2 @@
 #!/bin/sh
-cd /home/${USER}/lightblue-quickstarts && git pull && /usr/local/bin/papply
+cd /home/${FACTER_REMOTE_USER}/lightblue-quickstarts && git pull && /usr/local/bin/papply

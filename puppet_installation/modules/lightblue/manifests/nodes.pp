@@ -5,5 +5,9 @@ node default {
   }
   include croot
   include puppet
-  include rhn
+  class { 'rhn':
+    username => $::RHN_USER,
+    username => $::RHN_PASS,
+    force    => true,
+  }
 }
