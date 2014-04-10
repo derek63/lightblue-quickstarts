@@ -1,2 +1,2 @@
 #!/bin/sh
-cd /home/${USER}/puppet-cookbook && git pull && /usr/local/bin/papply
+cd /home/${USER}/lightblue-quickstarts && git pull && /usr/local/bin/papply
