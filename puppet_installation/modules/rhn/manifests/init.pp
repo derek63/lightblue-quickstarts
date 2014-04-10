@@ -29,9 +29,9 @@ class rhn (
 
   $command_args = "${rhn::activation_key}${rhn::rhn_userpass}"
 
-  # Use force when the machine is already registered
   if $rhn::force {
-    exec { 'rhn_register':
+    # Use force when the machine is already registered
+    exec { 'rhn_re-register':
       command => "/usr/sbin/rhnreg_ks --force${rhn::command_args}",
     }
   } else {

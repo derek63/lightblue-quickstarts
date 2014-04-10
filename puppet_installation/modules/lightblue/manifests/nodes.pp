@@ -1,7 +1,10 @@
 node default {
   case $::osfamily {
     RedHat  : { $supported = true }
-    default : { fail("The ${module_name} module is not supported on ${::osfamily} based systems") }
+    default : { 
+      notice("The ${module_name} module is not supported on ${::osfamily} based systems")
+      fail("The ${module_name} module is not supported on ${::osfamily} based systems") 
+    }
   }
 
   include croot
@@ -9,6 +12,5 @@ node default {
   class { 'rhn':
     username => $::rhnuser,
     password => $::rhnpass,
-    force    => true,
   }
 }
