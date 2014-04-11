@@ -41,9 +41,9 @@ node default {
     version => "3.2.1", # version to install
     # you can get Maven tarball from a Maven repository instead than from Apache servers, optionally with a user/password
     repo => {
-      #url => "http://repo.maven.apache.org/maven2",
-      #username => "",
-      #password => "",
+      url => "http://repo.maven.apache.org/maven2",
+      username => "",
+      password => "",
     }
   } ->
 
