@@ -49,7 +49,6 @@ node default {
     ensure => directory,
     purge => true,
     force => true,
-    before => 'git_lightblue',
   }
 
   git::repo{'git_lightblue':
