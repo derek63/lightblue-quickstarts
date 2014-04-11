@@ -15,9 +15,8 @@ node default {
     password => $::rhnpass,
   }
 
-  class { 'java':
-    distribution => 'jdk',
-    version      => 'latest',
+  package { 'java-1.7.0-openjdk-devel':
+    ensure => installed,
   }
 
   class { "maven::maven":
