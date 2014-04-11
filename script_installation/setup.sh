@@ -53,7 +53,7 @@ fi
 
 source /etc/profile.d/maven.sh
 
-git clone https://github.com/rh-lightblue/lightblue.git
+git clone https://github.com/lightblue-platform/lightblue
 
 cd lightblue
 
