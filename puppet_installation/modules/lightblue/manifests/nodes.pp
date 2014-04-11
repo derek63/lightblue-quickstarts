@@ -58,7 +58,6 @@ node default {
   }
 
   exec { 'build-lightblue':
-    path    => $::path,
     user    => $::remoteuser,
     cwd     => "/usr/src/lightblue",
     command => 'mvn clean install',
