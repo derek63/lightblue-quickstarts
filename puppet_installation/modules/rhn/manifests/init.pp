@@ -33,7 +33,7 @@ class rhn (
     # Use force when the machine is already registered
     exec { 'rhn_re-register':
       command => "rhnreg_ks --force ${rhn::command_args}",
-      path    => "/usr/local/bin/:/usr/bin:/bin/",
+      path    => "/usr/local/bin/:/usr/bin:/bin/:/usr/sbin",
       owner  => 'root',
     }
   } else {
@@ -41,14 +41,9 @@ class rhn (
     exec { 'rhn_register':
       command => "rhnreg_ks ${rhn::command_args}",
       creates => '/etc/sysconfig/rhn/systemid',
-      path    => "/usr/local/bin/:/usr/bin:/bin/",
+      path    => "/usr/local/bin/:/usr/bin:/bin/:/usr/sbin",
       owner  => 'root',
     }
-  }
-
-  $_systemid = inline_template("<%= File.exists?('/etc/sysconfig/rhn/systemid') %>")
-  case $_systemid {
-      "false": { fail('File /etc/sysconfig/rhn/systemid not found!') }
   }
 
   exec { 'register_with_rhn':
