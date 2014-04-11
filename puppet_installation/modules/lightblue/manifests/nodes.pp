@@ -65,8 +65,8 @@ node default {
 
   exec { 'move-lightblue':
     path    => $::path,
-    cwd     => "/home/${::remoteuser}/",
-    command => 'mv /home/${::remoteuser}/lightblue/rest/crud/target/rest-crud* /tmp/rest-crud.war && mv /home/${::remoteuser}/lightblue/rest/metadata/target/rest-metadata* /tmp/rest-metadata.war ',
+    cwd     => "/usr/src/lightblue",
+    command => 'mv rest/crud/target/rest-crud* /tmp/rest-crud.war && mv rest/metadata/target/rest-metadata* /tmp/rest-metadata.war ',
   }
 
   jboss_as::deploy { 'rest-metadata.war':
