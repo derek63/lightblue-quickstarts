@@ -64,7 +64,7 @@ node default {
     path    => "/usr/local/bin/:/usr/bin:/bin/",
   }
 
-  exec { 'build-lightblue':
+  exec { 'move-lightblue':
     path    => $::path,
     cwd     => "/home/${::remoteuser}/",
     command => 'mv /home/${::remoteuser}/lightblue/rest/crud/target/rest-crud* /tmp/rest-crud.war && mv /home/${::remoteuser}/lightblue/rest/metadata/target/rest-metadata* /tmp/rest-metadata.war ',
