@@ -13,3 +13,6 @@
 [submodule "puppet_installation/modules/wget"]
 	path = puppet_installation/modules/wget
 	url = https://github.com/luan-cestari/puppet-wget
+[submodule "puppet_installation/modules/stdlib"]
+	path = puppet_installation/modules/stdlib
+	url = https://github.com/luan-cestari/puppetlabs-stdlib
