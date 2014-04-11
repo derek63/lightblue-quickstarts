@@ -33,14 +33,14 @@ class rhn (
     # Use force when the machine is already registered
     exec { 'rhn_re-register':
       path    => "/usr/local/bin/:/usr/bin:/bin/:/usr/sbin",
-      owner   => 'root',
+      user    => 'root',
       command => "rhnreg_ks --force ${rhn::command_args}",
     }
   } else {
     notice("The xxx /usr/sbin/rhnreg_ks${rhn::command_args}")
     exec { 'rhn_register':
       path    => "/usr/local/bin/:/usr/bin:/bin/:/usr/sbin",
-      owner   => 'root',
+      user    => 'root',
       command => "rhnreg_ks ${rhn::command_args}",
       creates => '/etc/sysconfig/rhn/systemid',
     }
