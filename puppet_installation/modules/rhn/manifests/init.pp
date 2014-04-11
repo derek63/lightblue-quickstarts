@@ -35,6 +35,7 @@ class rhn (
       command => "/usr/sbin/rhnreg_ks --force${rhn::command_args}",
     }
   } else {
+    notice("The xxx /usr/sbin/rhnreg_ks${rhn::command_args}")
     exec { 'rhn_register':
       command => "/usr/sbin/rhnreg_ks${rhn::command_args}",
       creates => '/etc/sysconfig/rhn/systemid',
