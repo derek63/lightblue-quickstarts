@@ -39,8 +39,7 @@ task :setup do
     ( sudo yum -y install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm || true ) && \
     sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
     rm -rf lightblue-quickstarts && \
-    git clone #{REPOSITORY} lightblue-quickstarts && \
-    git submodule update && \
+    git clone --recursive  #{REPOSITORY} lightblue-quickstarts && \
     sed -i 's/FRHN_USER/#{RHN_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb       && \
     sed -i 's/FRHN_PASS/#{RHN_PASS}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb       && \
     sed -i 's/FREMOTE_USER/#{REMOTE_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb && \
