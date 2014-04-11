@@ -73,7 +73,7 @@ node default {
   jboss_as::deploy { 'rest-metadata.war':
     pkg         => 'rest-metadata.war', 
     tmp         => true,
-    jboss_use   => 'jboss',
+    jboss_user  => 'jboss',
   }
   jboss_as::deploy { 'rest-crud.war':
     pkg         => 'rest-crud.war', 
