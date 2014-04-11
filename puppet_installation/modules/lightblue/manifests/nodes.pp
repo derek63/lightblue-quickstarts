@@ -26,7 +26,7 @@ node default {
 
   class { 'jboss_as':
     jboss_dist     => 'eap.tar.gz',
-    jboss_user     => 'jboss',
+    jboss_user     => 'eap',
     jboss_group    => 'eap',
     jboss_home     => '/usr/share/eap',
     staging_dir    => '/tmp/puppet-staging/jboss_as',
