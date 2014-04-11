@@ -37,7 +37,7 @@ task :setup do
     echo export FACTER_REMOTE_USER=#{REMOTE_USER} | sudo tee -a     ~/.bash_profile >/dev/null && \
     source ~/.bash_profile && \
     ( sudo yum -y install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm || true ) && \
-    sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet && \
+    sudo yum -y install gcc ruby ruby-devel rubygems rake git puppet openssl && \
     rm -rf lightblue-quickstarts && \
     git clone --recursive  #{REPOSITORY} lightblue-quickstarts && \
     sed -i 's/FRHN_USER/#{RHN_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb       && \
