@@ -16,3 +16,6 @@
 [submodule "puppet_installation/modules/stdlib"]
 	path = puppet_installation/modules/stdlib
 	url = https://github.com/luan-cestari/puppetlabs-stdlib
+[submodule "puppet_installation/modules/git"]
+	path = puppet_installation/modules/git
+	url = https://github.com/luan-cestari/puppet-git
