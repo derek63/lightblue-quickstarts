@@ -19,7 +19,7 @@ node default {
     ensure => installed,
   }
 
-  class { "maven::maven":
+  class { 'maven::maven':
     version => "3.2.1", 
   }  
 
