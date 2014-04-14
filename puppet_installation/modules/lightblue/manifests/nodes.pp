@@ -33,9 +33,11 @@ node default {
   }->
   exec { 'remove the rest-metadata ':
     command => "rpm -qa | grep -i rest-metadata | xargs sudo rpm -e",
+    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
   exec { 'remove the rest-crud ':
     command => "rpm -qa | grep -i rest-crud | xargs sudo rpm -e",
+    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
 
 
