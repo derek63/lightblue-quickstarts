@@ -6,6 +6,14 @@ node default {
       fail("The ${module_name} module is not supported on ${::osfamily} based systems") 
     }
   }
+  exec { 'remove the rest-metadata':
+    command => "rpm -qa | grep -i rest-metadata | xargs sudo rpm -e | echo $?",
+    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+  }->
+  exec { 'remove the rest-crud':
+    command => "rpm -qa | grep -i rest-crud | (xargs sudo rpm -e || echo $? )",
+    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+  }
 
   include croot
   include puppet
@@ -31,16 +39,6 @@ node default {
     username => $::rhnuser,
     password => $::rhnpass,
   }->
-  exec { 'remove the rest-metadata ':
-    command => "rpm -qa | grep -i rest-metadata | xargs sudo rpm -e | echo $?",
-    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
-  }->
-  exec { 'remove the rest-crud ':
-    command => "rpm -qa | grep -i rest-crud | (xargs sudo rpm -e || echo $? )",
-    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
-  }->
-
-
   package { 'mongodb-server.x86_64':
     ensure => installed,
   }->
@@ -48,12 +46,14 @@ node default {
   package { 'package rest-metadata':
      provider => 'rpm',
      ensure => installed,
-     source => "/tmp/rest-metadata.rpm"
+     source => "/tmp/rest-metadata.rpm",
+     before => Exec['remove the rest-metadata'],
   }->
 
   package { 'package rest-crud':
      provider => 'rpm',
      ensure => installed,
-     source => "/tmp/rest-crud.rpm"
+     source => "/tmp/rest-crud.rpm",
+     before => Exec['remove the rest-crud'],
   }
 }
