@@ -37,10 +37,19 @@ node default {
     password => $::rhnpass,
   }->
 
-  mongodb::db { 'testdb':
-    user          => 'user1',
-    password_hash => 'a15fbfca5e3a758be80ceaf42458bcd8',
-  }->
+mongodb_database { testdb:
+  ensure   => present,
+  tries    => 10,
+  require  => Class['mongodb::server'],
+}->
+mongodb_user { testuser:
+  ensure        => present,
+  password_hash => mongodb_password('testuser', 'p@ssw0rd'),
+  database      => testdb,
+  roles         => ['readWrite', 'dbAdmin'],
+  tries         => 10,
+  require       => Class['mongodb::server'],
+}->
 
   file { "/usr/src/lightblue":
     ensure => directory,
