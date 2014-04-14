@@ -32,19 +32,8 @@ node default {
     password => $::rhnpass,
   }->
 
-  mongodb_database { testdb:
-    ensure   => present,
-    tries    => 10,
-    require  => Class['mongodb::server'],
-  }->
-
-  mongodb_user { testuser:
-    ensure        => present,
-    password_hash => mongodb_password('testuser', 'p@ssw0rd'),
-    database      => testdb,
-    roles         => ['readWrite', 'dbAdmin'],
-    tries         => 10,
-    require       => Class['mongodb::server'],
+  package { 'mongodb-server.x86_64':
+    ensure => installed,
   }->
 
   package { 'package rest-metadata':

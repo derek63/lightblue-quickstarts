@@ -8,6 +8,8 @@ REMOTE_USER  = ENV['REMOTE_USER']   # The user of the remote machine
 HOSTNAME     = ENV['HOSTNAME']      # Using site.pp and different HOSTNAME, we can set different eviroemnt automatically
 RHN_USER     = ENV['RHN_USER']
 RHN_PASS     = ENV['RHN_PASS']
+RPM_CRUD     = ENV['RPM_CRUD']
+RPM_META     = ENV['RPM_META']
 
 
 
