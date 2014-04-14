@@ -1,7 +1,6 @@
 COMMAND_SSH_PREFIX = 'ssh -t -A -l ' 
+COMMAND_SCP_PREFIX = 'scp -i '
 REPOSITORY  = 'https://github.com/lightblue-platform/lightblue-quickstarts.git'
-
-
 
 PATH_PEM_KEY = ENV['PATH_PEM_KEY']  # The path to AWS key pair (/ your private pem key to access the remote node)
 REMOTE_TARGET= ENV['REMOTE_TARGET'] # IP or DNS of the client/target.
@@ -12,20 +11,28 @@ RHN_PASS     = ENV['RHN_PASS']
 
 
 
+
 task :default => [:setup] #You may add :add_hooks if you have puppet. By default, those are the tasks to run if no argumetn is specificed 
+
 
 
 
 desc "Update the target: ENV['REMOTE_USER']"
 task :apply do
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY} #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY} #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
   sh "git push"
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} update_quickstarts"
 end
 
 
 
+
 desc "Setup for the CLIENT with new hostname HOSTNAME (FOR RHEL ONLY)"
 task :setup do
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY} #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY} #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
+
   commands = <<COMMANDS
     sudo hostname #{HOSTNAME} && \
     echo #{HOSTNAME} | sudo tee /etc/hostname && \
@@ -45,9 +52,11 @@ task :setup do
     sed -i 's/FREMOTE_USER/#{REMOTE_USER}/g' lightblue-quickstarts/puppet_installation/modules/facts/lib/facter/required_facts.rb && \
     sudo -E puppet apply --modulepath=/home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules /home/#{REMOTE_USER}/lightblue-quickstarts/puppet_installation/modules/lightblue/manifests/site.pp
 COMMANDS
+
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} '#{commands}'"
   puts "The client is fully working! You can now checkusing its ip: #{REMOTE_TARGET} "
 end
+
 
 
 
@@ -57,3 +66,4 @@ task :add_hooks do
   sh "ln -s #{here}/hooks/syntax.sh #{here}/.git/hooks/pre-commit" #before commit validation
   puts "Hooks added locally"
 end
+

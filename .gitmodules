@@ -1,12 +1,6 @@
 [submodule "puppet_installation/modules/puppet-jboss_as"]
 	path = puppet_installation/modules/jboss_as
 	url = https://github.com/luan-cestari/puppet-jboss_as.git
-[submodule "puppet_installation/modules/puppetlabs-java"]
-	path = puppet_installation/modules/java
-	url = https://github.com/luan-cestari/puppetlabs-java.git
-[submodule "puppet_installation/modules/puppet-maven"]
-	path = puppet_installation/modules/maven
-	url = https://github.com/luan-cestari/puppet-maven.git
 [submodule "puppet_installation/modules/puppetlabs-mongodb"]
 	path = puppet_installation/modules/mongodb
 	url = https://github.com/luan-cestari/puppetlabs-mongodb.git
@@ -16,6 +10,3 @@
 [submodule "puppet_installation/modules/stdlib"]
 	path = puppet_installation/modules/stdlib
 	url = https://github.com/luan-cestari/puppetlabs-stdlib
-[submodule "puppet_installation/modules/git"]
-	path = puppet_installation/modules/git
-	url = https://github.com/luan-cestari/puppet-git

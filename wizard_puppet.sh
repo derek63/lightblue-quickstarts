@@ -17,8 +17,10 @@ echo "Please enter your red hat access user:"
 read    RHN_USER
 echo "Please enter your red hat access password:"
 read -s RHN_PASS
-
-
+echo "Please enter the path to RPM for the rest crud (or enter for default)"
+read -s RPM_CRUD
+echo "Please enter the path to RPM for the rest metadata (or enter for default)"
+read -s RPM_META
 
 PATH_PEM_KEY=${PATH_PEM_KEY:-"~/.ssh/soa.pem"}
 REMOTE_TARGET=${REMOTE_TARGET:-"54.187.7.27"} # You can add your default IP here
@@ -26,6 +28,8 @@ REMOTE_USER=${REMOTE_USER:-"ec2-user"}
 HOSTNAME=${HOSTNAME:-"lightblue-dev"}
 RHN_USER=${RHN_USER:-"a"}           # You can add your default rhn user here
 RHN_PASS=${RHN_PASS:-"b"}           # You can add your default rhn pass here
+RPM_CRUD=${RPM_CRUD:-"~/.m2/repository/com/redhat/lightblue/rest/rest-crud/0.1-SNAPSHOT/rest-crud-0.1-SNAPSHOT-rpm.rpm"}
+RPM_META=${RPM_META:-"~/.m2/repository/com/redhat/lightblue/rest/rest-metadata/0.1-SNAPSHOT/rest-metadata-0.1-SNAPSHOT-rpm.rpm"}
 
 export PATH_PEM_KEY
 export REMOTE_TARGET
@@ -33,6 +37,8 @@ export REMOTE_USER
 export HOSTNAME
 export RHN_USER
 export RHN_PASS
+export RPM_CRUD
+export RPM_META
 
 
 
@@ -43,6 +49,6 @@ rake
 echo "!!!!!!!!!!!!!!"
 echo ""
 echo "Use the following command to set up the environment variables for next time and the command 'rake'"
-echo "export PATH_PEM_KEY='$PATH_PEM_KEY' && export REMOTE_TARGET='$REMOTE_TARGET' && export REMOTE_USER='$REMOTE_USER' && export HOSTNAME='$HOSTNAME' && export RHN_USER='$RHN_USER' && export RHN_PASS='$RHN_PASS'"
+echo "export PATH_PEM_KEY='$PATH_PEM_KEY' && export REMOTE_TARGET='$REMOTE_TARGET' && export REMOTE_USER='$REMOTE_USER' && export HOSTNAME='$HOSTNAME' && export RHN_USER='$RHN_USER' && export RHN_PASS='$RHN_PASS' && export RPM_CRUD='$RPM_CRUD' && export RPM_META='$RPM_META'"
 echo ""
 echo "!!!!!!!!!!!!!!"
