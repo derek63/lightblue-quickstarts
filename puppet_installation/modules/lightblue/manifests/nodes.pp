@@ -31,6 +31,13 @@ node default {
     username => $::rhnuser,
     password => $::rhnpass,
   }->
+  exec { 'remove the rest-metadata ':
+    command => "rpm -qa | grep -i rest-metadata | xargs sudo rpm -e",
+  }->
+  exec { 'remove the rest-crud ':
+    command => "rpm -qa | grep -i rest-crud | xargs sudo rpm -e",
+  }->
+
 
   package { 'mongodb-server.x86_64':
     ensure => installed,
