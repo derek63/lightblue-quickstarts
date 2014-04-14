@@ -9,6 +9,7 @@ node default {
 
   include croot
   include puppet
+  include mongodb
 
   class { 'rhn':
     username => $::rhnuser,
