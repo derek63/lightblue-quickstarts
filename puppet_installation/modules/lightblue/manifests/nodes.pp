@@ -35,11 +35,11 @@ node default {
     ensure => installed,
   }->
   exec { 'install the rest-metadata':
-    command => "rpm -iv /tmp/rest-metadata.rpm",
+    command => "rpm -iv /tmp/rest-metadata.rpm || true",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
   exec { 'install the rest-crud':
-    command => "rpm -iv /tmp/rest-crud.rpm",
+    command => "rpm -iv /tmp/rest-crud.rpm || true",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }
 }
