@@ -24,7 +24,7 @@ node default {
     jboss_dist     => 'eap.zip',
     jboss_user     => 'jboss-as',
     jboss_group    => 'jboss-as',
-    jboss_home     => '/usr/share/eap',
+    jboss_home     => '/usr/share/jboss',
     staging_dir    => '/tmp/puppet-staging/jboss_as',
     standalone_tpl => 'jboss_as/standalone.xml.erb',
     download => true,
