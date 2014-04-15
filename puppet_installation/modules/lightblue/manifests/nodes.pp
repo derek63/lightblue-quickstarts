@@ -34,6 +34,9 @@ node default {
   package { 'mongodb-server.x86_64':
     ensure => installed,
   }->
+  package { 'mongodb.x86_64':
+    ensure => installed,
+  }->
   exec { 'install the rest-metadata':
     command => "rpm -iv /tmp/rest-metadata.rpm || true",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
