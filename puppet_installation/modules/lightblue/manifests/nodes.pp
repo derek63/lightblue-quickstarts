@@ -45,7 +45,7 @@ node default {
     require =>  Class['jboss_as'],
   }->
   exec { 'config mongodb.conf: smallfiles':
-    command => "echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf",
+    command => "echo 'smallfiles = true' | tee -a /etc/mongodb.conf",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
     unless => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
