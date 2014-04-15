@@ -3,6 +3,7 @@ COMMAND_SCP_PREFIX = 'rsync -rave "ssh -i'
 REPOSITORY  = 'https://github.com/lightblue-platform/lightblue-quickstarts.git'
 
 PATH_PEM_KEY = ENV['PATH_PEM_KEY']  # The path to AWS key pair (/ your private pem key to access the remote node)
+PATH_PEM_HOME= PATH_PEM_KEY.sub '~', '$HOME'
 REMOTE_TARGET= ENV['REMOTE_TARGET'] # IP or DNS of the client/target.
 REMOTE_USER  = ENV['REMOTE_USER']   # The user of the remote machine
 HOSTNAME     = ENV['HOSTNAME']      # Using site.pp and different HOSTNAME, we can set different eviroemnt automatically
@@ -21,8 +22,8 @@ task :default => [:setup] #You may add :add_hooks if you have puppet. By default
 
 desc "Update the target: ENV['REMOTE_USER']"
 task :apply do
-  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY}\" #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
-  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY}\" #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_HOME}\" #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_HOME}\" #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
   sh "git push"
   sh "#{COMMAND_SSH_PREFIX} #{REMOTE_USER} -i #{PATH_PEM_KEY} #{REMOTE_TARGET} update_quickstarts"
 end
@@ -32,8 +33,8 @@ end
 
 desc "Setup for the CLIENT with new hostname HOSTNAME (FOR RHEL ONLY)"
 task :setup do
-  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY}\" #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
-  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_KEY}\" #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_HOME}\" #{RPM_CRUD} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-crud.rpm"
+  sh "#{COMMAND_SCP_PREFIX} #{PATH_PEM_HOME}\" #{RPM_META} #{REMOTE_USER}@#{REMOTE_TARGET}:/tmp/rest-metadata.rpm"
   commands = <<COMMANDS
     sudo hostname #{HOSTNAME} && \
     echo #{HOSTNAME} | sudo tee /etc/hostname && \
