@@ -47,7 +47,7 @@ node default {
   exec { 'config mongodb.conf: smallfiles':
     command => "echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
-    unless => "grep --quiet smallfiles /etc/mongodb.conf"
+    unless => "grep --quiet smallfiles /etc/mongodb.conf || test $?  = 1 "
   }->
   service { "mongod":
     ensure => "running",
