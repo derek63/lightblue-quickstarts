@@ -22,8 +22,8 @@ node default {
 
   class { 'jboss_as':
     jboss_dist     => 'eap.zip',
-    jboss_user     => 'eap',
-    jboss_group    => 'eap',
+    jboss_user     => 'jboss-as',
+    jboss_group    => 'jboss-as',
     jboss_home     => '/usr/share/eap',
     staging_dir    => '/tmp/puppet-staging/jboss_as',
     standalone_tpl => 'jboss_as/standalone.xml.erb',
@@ -45,9 +45,6 @@ node default {
     require =>  Class['jboss_as'],
   }->
   service { "mongod":
-    ensure => "running",
-  }->
-  service { "jboss-as":
     ensure => "running",
   }
 }
