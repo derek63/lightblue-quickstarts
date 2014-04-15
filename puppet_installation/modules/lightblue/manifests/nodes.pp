@@ -45,8 +45,9 @@ node default {
     require =>  Class['jboss_as'],
   }->
   exec { 'config mongodb.conf: smallfiles':
-    command => "if ! grep --quiet smallfiles /etc/mongodb.conf; then echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf; fi",
+    command => "echo 'smallfiles = true' | sudo tee -a /etc/mongodb.conf",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    unless => "grep --quiet smallfiles /etc/mongodb.conf"
   }->
   service { "mongod":
     ensure => "running",
