@@ -21,7 +21,7 @@ node default {
 
 
   class { 'jboss_as':
-    jboss_dist     => 'eap.tar.gz',
+    jboss_dist     => 'eap.zip',
     jboss_user     => 'eap',
     jboss_group    => 'eap',
     jboss_home     => '/usr/share/eap',
