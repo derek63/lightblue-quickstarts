@@ -36,10 +36,18 @@ node default {
   }->
   exec { 'install the rest-metadata':
     command => "rpm -iv /tmp/rest-metadata.rpm || true",
-    path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    require =>  Class['jboss_as'],
   }->
   exec { 'install the rest-crud':
     command => "rpm -iv /tmp/rest-crud.rpm || true",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    require =>  Class['jboss_as'],
+  }->
+  service { "mongod":
+    ensure => "running",
+  }->
+  service { "jboss-as":
+    ensure => "running",
   }
 }
