@@ -38,12 +38,12 @@ node default {
     ensure => installed,
   }->
   exec { 'install the rest-metadata':
-    command => "rpm -iv /tmp/rest-metadata.rpm || true",
+    command => "rpm -Fiv /tmp/rest-metadata.rpm || true",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
     require =>  Class['jboss_as'],
   }->
   exec { 'install the rest-crud':
-    command => "rpm -iv /tmp/rest-crud.rpm || true",
+    command => "rpm -Fiv /tmp/rest-crud.rpm || true",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
     require =>  Class['jboss_as'],
   }->
