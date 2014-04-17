@@ -64,8 +64,8 @@ node default {
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'config.properties',
-   owner              => 'jboss_as',
-   group              => 'jboss_as',
+   owner              => 'jboss-as',
+   group              => 'jboss-as',
    content            => template('lightblue/config.properties.erb'),
   }->
 
@@ -74,8 +74,8 @@ node default {
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'lightblue-crud.json',
-   owner              => 'jboss_as',
-   group              => 'jboss_as',
+   owner              => 'jboss-as',
+   group              => 'jboss-as',
    content            => template('lightblue/lightblue-crud.json.erb'),
   }->
 
@@ -84,8 +84,8 @@ node default {
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'lightblue-metadata.json',
-   owner              => 'jboss_as',
-   group              => 'jboss_as',
+   owner              => 'jboss-as',
+   group              => 'jboss-as',
    content            => template('lightblue/lightblue-metadata.json.erb'),
   }->
 
