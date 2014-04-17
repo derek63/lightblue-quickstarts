@@ -52,14 +52,15 @@ node default {
     require =>  Class['jboss_as'],
   }->
 
-  class{'jboss_as::jbossmodule':
-#  jboss_as::jbossmodule{'Set jboss module directory':
+#  class{'jboss_as::jbossmodule':
+  jboss_as::jbossmodule{'Set jboss module directory':
    jboss_home => '/usr/share/jboss',
    moduledir  => 'com.redhat.lightblue',
   }->
 
   #You may use variables (like $template_module_path in jbossmodule) to set dynamic content
-  class{'jboss_as::jbossmodulefile':
+#  class{'jboss_as::jbossmodulefile':
+  jboss_as::jbossmodulefile{'Set config.properties':
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com.redhat.lightblue',
    configuration_file => 'config.properties',
@@ -68,7 +69,8 @@ node default {
    content            => template('lightblue/config.properties.erb'),
   }->
 
-  class{'jboss_as::jbossmodulefile':
+#  class{'jboss_as::jbossmodulefile':
+  jboss_as::jbossmodulefile{'Set lightblue-crud.json':
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com.redhat.lightblue',
    configuration_file => 'lightblue-crud.json',
@@ -77,7 +79,8 @@ node default {
    content            => template('lightblue/lightblue-crud.json.erb'),
   }->
 
-  class{'jboss_as::jbossmodulefile':
+#  class{'jboss_as::jbossmodulefile':
+  jboss_as::jbossmodulefile{'Set lightblue-metadata.json':
    jboss_home         => '/usr/share/jboss',
    moduledir          => 'com.redhat.lightblue',
    configuration_file => 'lightblue-metadata.json',
