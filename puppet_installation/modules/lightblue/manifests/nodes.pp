@@ -65,7 +65,7 @@ node default {
    configuration_file => 'config.properties',
    owner              => 'jboss_as',
    group              => 'jboss_as',
-   content            => template('config.properties.erb'),
+   content            => template('lightblue/config.properties.erb'),
   }->
 
   class{'jboss_as::jbossmodulefile':
@@ -74,7 +74,7 @@ node default {
    configuration_file => 'lightblue-crud.json',
    owner              => 'jboss_as',
    group              => 'jboss_as',
-   content            => template('lightblue-crud.json.erb'),
+   content            => template('lightblue/lightblue-crud.json.erb'),
   }->
 
   class{'jboss_as::jbossmodulefile':
@@ -83,7 +83,7 @@ node default {
    configuration_file => 'lightblue-metadata.json',
    owner              => 'jboss_as',
    group              => 'jboss_as',
-   content            => template('lightblue-metadata.json.erb'),
+   content            => template('lightblue/lightblue-metadata.json.erb'),
   }->
 
   exec { 'config mongodb.conf: smallfiles':
