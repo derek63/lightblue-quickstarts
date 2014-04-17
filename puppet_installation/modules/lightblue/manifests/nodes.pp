@@ -55,7 +55,7 @@ node default {
   service { "mongod":
     ensure => "running",
   }->
-  exec { 'config mongodb.conf: smallfiles':
+  exec { 'Network':
     command => "iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT",
     path => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
     unless => "iptables -L | grep --quiet 'tcp dpt:webcache'  2>/dev/null"
