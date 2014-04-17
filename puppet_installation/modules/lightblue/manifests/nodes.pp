@@ -56,6 +56,8 @@ node default {
   jboss_as::jbossmodule{'Set jboss module directory':
    jboss_home => '/usr/share/jboss',
    moduledir  => 'com/redhat/lightblue',
+   owner              => 'jboss-as',
+   group              => 'jboss-as',
   }->
 
   #You may use variables (like $template_module_path in jbossmodule) to set dynamic content
