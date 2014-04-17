@@ -52,7 +52,8 @@ node default {
     require =>  Class['jboss_as'],
   }->
 
-  jboss_as::jbossmodule{'Set jboss module directory':
+  class{'jboss_as::jbossmodule':
+#  jboss_as::jbossmodule{'Set jboss module directory':
    jboss_home => '/usr/share/jboss',
    moduledir  => 'com.redhat.lightblue',
   }->
