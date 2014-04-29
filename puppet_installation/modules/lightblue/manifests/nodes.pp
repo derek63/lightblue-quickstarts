@@ -40,7 +40,7 @@ node default {
 #    ensure => installed,
 #  }->
   exec { 'mongo repo':
-    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo ',
+    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo || true',
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
  
