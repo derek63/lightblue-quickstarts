@@ -32,13 +32,16 @@ node default {
     password       => $::rhnpass,
   }->
 
+##from epel, but it is version 2.4
 #  package { 'mongodb-server.x86_64':
 #    ensure => installed,
 #  }->
-
 #  package { 'mongodb.x86_64':
 #    ensure => installed,
 #  }->
+
+
+## from mongo repository (2.6)
   exec { 'mongo repo':
     command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo || true',
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
@@ -113,8 +116,25 @@ node default {
     unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
 
-  service { "mongod":
-    ensure => "running",
+##for epel or after configured the mongos`s RPM file
+#  service { "mongod":
+#    ensure => "running",
+#  }->
+
+##for mongo repository
+  file { "/data/db":
+    ensure => "directory",
+  }->
+  exec { 'start mongo with smallfiles':
+    command => "sudo chmod 777 /data/db && nohup mongod --config /etc/mongodb.conf & || true",
+    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
+  }->
+##
+  exec { 'start mongo with smallfiles':
+    command => "nohup mongod --config /etc/mongodb.conf & || true",
+    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
 
   exec { 'Network':
