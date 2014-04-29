@@ -30,7 +30,7 @@ curl -o maven.zip http://www.us.apache.org/dist/maven/maven-3/3.2.1/binaries/apa
 curl -o mongodb.tgz http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz 
 #we can change to install using yum -> http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/
 
-sudo yum install -q -y git java-1.7.0-openjdk-devel.x86_64 
+sudo yum install -q -y git java-1.7.0-openjdk-devel.x86_64 @development-tools fedora-packager
 
 tar -zxvf mongodb.tgz
 
