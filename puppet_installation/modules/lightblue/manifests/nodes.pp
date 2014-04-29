@@ -141,7 +141,7 @@ node default {
   }->
 ##
   exec { 'start mongo with smallfiles':
-    command => "nohup mongod --config /etc/mongodb.conf & || true",
+    command => "nohup mongod --config /etc/mongodb.conf &>/tmp/mongo.log &",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
 
