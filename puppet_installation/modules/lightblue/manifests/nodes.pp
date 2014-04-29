@@ -110,6 +110,16 @@ node default {
    content            => template('lightblue/lightblue-metadata.json.erb'),
   }->
 
+#  class{'jboss_as::jbossmodulefile':
+  jboss_as::jbossmodulefile{'Set datasources.json':
+   jboss_home         => '/usr/share/jboss',
+   moduledir          => 'com/redhat/lightblue',
+   configuration_file => 'datasources.json',
+   owner              => 'jboss-as',
+   group              => 'jboss-as',
+   content            => template('lightblue/datasources.json.erb'),
+  }->
+
   exec { 'config mongodb.conf: smallfiles':
     command => "echo 'smallfiles = true' | tee -a /etc/mongodb.conf",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
