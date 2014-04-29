@@ -32,13 +32,19 @@ node default {
     password       => $::rhnpass,
   }->
 
-  package { 'mongodb-server.x86_64':
-    ensure => installed,
-  }->
+#  package { 'mongodb-server.x86_64':
+#    ensure => installed,
+#  }->
 
-  package { 'mongodb.x86_64':
-    ensure => installed,
+#  package { 'mongodb.x86_64':
+#    ensure => installed,
+#  }->
+  exec { 'mongo repo':
+    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo ',
+    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
+ 
+  package {'mongodb-org': ensure => installed, } ->
 
   exec { 'install the rest-metadata':
     command => "rpm -iv /tmp/rest-metadata.rpm || true",
