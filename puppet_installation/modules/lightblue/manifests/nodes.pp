@@ -138,13 +138,11 @@ node default {
   exec { 'create mongo folder (2.6 req)':
     command => "sudo chmod 777 /data/db || true",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
-    unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
 ##
   exec { 'start mongo with smallfiles':
     command => "nohup mongod --config /etc/mongodb.conf & || true",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
-    unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
 
   exec { 'Network':
