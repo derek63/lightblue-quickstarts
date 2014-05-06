@@ -132,6 +132,9 @@ node default {
 #  }->
 
 ##for mongo repository
+  file { "/data":
+    ensure => "directory",
+  }->
   file { "/data/db":
     ensure => "directory",
   }->
