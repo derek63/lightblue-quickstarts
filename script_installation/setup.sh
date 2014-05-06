@@ -59,8 +59,28 @@ cd lightblue
 
 mvn -q clean install
 
+mkdir ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/
+mkdir ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue
+mkdir ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue/main
+
+#Copying config jars and module.xml to JBoss modules directory
+cp ~/lightblue/config/common/target/*.jar ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue/main
+cp ~/lightblue/crud/common/target/*.jar ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue/main
+cp ~/lightblue/metadata/common/target/*.jar ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue/main
+cp ~/lightblue/rest/etc/mongo/* ~/jboss-eap-6.2/modules/system/layers/base/com/redhat/lightblue/main
+
+#Copying REST deployments to JBoss
 cp ~/lightblue/rest/crud/target/rest-crud* ~/jboss-eap-6.2/standalone/deployments/ 
 cp ~/lightblue/rest/metadata/target/rest-metadata* ~/jboss-eap-6.2/standalone/deployments/ 
 
-echo "Please run: ' ~/jboss-eap-6.2/bin/standalone.sh &>/dev/null & '"
+#Create directory for Mongo data files
+mkdir ~/lbdata
+
+#Starting MongoDB
+nohup ~/mongodb-linux-x86_64-2.4.9/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1 &
+
+#Start JBoss
+nohup ~/jboss-eap-6.2/bin/standalone.sh & >/dev/null 2>&1 &
+
+echo "Installation complete, Lightblue REST Services should be available at http://localhost:8080/metadata and http://localhost:8080/data"
 echo "You may also run ' source /etc/profile.d/maven.sh ' to set enviroment variables without restarting"
