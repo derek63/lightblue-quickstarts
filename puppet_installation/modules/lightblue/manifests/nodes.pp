@@ -147,11 +147,10 @@ node default {
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
   exec { 'force jboss permissions':
-   command => "chown -R ${jboss_user}:${jboss_group} ${jboss_home}",
-   require => Exec['strip']
-   notify=> Service['jboss-as'],
+   command => "chown -R jboss-as:jboss-as /usr/share/jboss",
+   path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+   notify  => Service['jboss-as'],
   }->
-
   exec { 'Network':
     command => "iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],

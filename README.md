@@ -11,6 +11,8 @@ For puppet installation, use the wizard\_puppet.sh script file to help you to se
 
 The wizard\_puppet.sh script will first install the necessary packages and ask the user a couple of question. Then it will  use the 'rake' command (which uses the Rakefile of this directory to get the configurations) to remote access the EC2 instance, deploy the necessary RPMs and start the remote puppet. You can directly call 'rake' command using this a as workspace directory to avoid the overhead of answering the same questions again and again, it will just require some enviroment variables to be provided ( the end of the  wizard\_puppet.sh script will provide the one line of command line code that will expose the configurations to rake).
 
+For puppet modifications, you probably would want to run 'rake add\_hooks' to add a hook into the git repository to check your scripts before any commit.
+
 Shell script installation option 
 --------------------------------
 
