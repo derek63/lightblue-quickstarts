@@ -146,7 +146,12 @@ node default {
     command => "nohup mongod --config /etc/mongodb.conf &>/tmp/mongo.log &",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
-  exec { 'force jboss permissions':
+  exec { 'force jboss ACL':
+   command => "chmod 774 -R /usr/share/jboss/standalone/deployments",
+   path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+   notify  => Service['jboss-as'],
+  }->
+  exec { 'force jboss ownership':
    command => "chown -R jboss-as:jboss-as /usr/share/jboss",
    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
    notify  => Service['jboss-as'],
