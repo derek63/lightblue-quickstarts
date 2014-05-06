@@ -43,7 +43,7 @@ node default {
 
 ## from mongo repository (2.6)
   exec { 'mongo repo':
-    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo || true',
+    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo',
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
  

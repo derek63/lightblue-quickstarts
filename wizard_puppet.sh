@@ -4,6 +4,7 @@
 
 echo "Checking missing files to run the script"
 sudo yum -y install gcc ruby ruby-devel rubygems rake git # You can remove this line later. ALso, you can choose to not install puppet if you want the git hook validation
+sudo gem install aws-sdk # it is necessary to create aws instances
 
 echo "Please enter the path to the PEM file to access the aws's ec2 instance (hit enter for default, ~/.ssh/soa.pem):"
 read    PATH_PEM_KEY

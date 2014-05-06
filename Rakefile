@@ -1,3 +1,5 @@
+require 'aws-sdk'
+
 COMMAND_SSH_PREFIX = 'ssh -t -A -l ' 
 COMMAND_SCP_PREFIX = 'rsync -rave "ssh -i'
 REPOSITORY  = 'https://github.com/lightblue-platform/lightblue-quickstarts.git'
@@ -68,3 +70,37 @@ task :add_hooks do
   puts "Hooks added locally"
 end
 
+desc "Create EC2 instance"
+task :create_ec2 do
+  puts "Creating a new EC2 instance...\n\tNote:required to have MY_KEY_PAIR_NAME, ACCESS_KEY_ID and SECRET_ACCESS_KEY enviroment variables\n" 
+  
+  # Required fields
+  id = ENV['ACCESS_KEY_ID']
+  secret = ENV['SECRET_ACCESS_KEY']
+  key_pair = ENV['MY_KEY_PAIR_NAME'] 
+  #optional
+  region  = ENV['REGION'] || "us-west-2"
+  image  = ENV['IMAGE_ID'] || "ami-b8a63b88"
+  instance_type = ENV['INSTANCE_TYPE'] || "m3.medium"
+  security_group = ENV['SECURITY_GROUP'] || "Lightblue"
+
+  ec2 = AWS::EC2.new({
+    :access_key_id => id,
+    :secret_access_key => secret,
+    :region => region,
+  })
+
+  i = ec2.instances.create(
+    :image_id => image,
+    :instance_type => instance_type,
+    :count => 1, 
+    :security_groups => security_group, 
+    :key_pair => ec2.key_pairs[key_pair]) 
+
+  puts "Requested to AWS for an instance and it is provision it"
+
+  sleep 10 while i.status == :pending
+
+  puts "Instance created with the public IP="+i.ip_address+" and with ID="+i.id
+  puts "run 'export REMOTE_TARGET='"+i.ip_address+"' and then 'rake' to setup the enviroment in that machine"
+end
