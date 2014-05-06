@@ -118,9 +118,7 @@ node default {
    owner              => 'jboss-as',
    group              => 'jboss-as',
    content            => template('lightblue/datasources.json.erb'),
-   notify=> Service['jboss-as'],
   }->
-
   exec { 'config mongodb.conf: smallfiles':
     command => "echo 'smallfiles = true' | tee -a /etc/mongodb.conf",
     path    => ['/usr/bin', '/bin' ],
@@ -147,6 +145,11 @@ node default {
   exec { 'start mongo with smallfiles':
     command => "nohup mongod --config /etc/mongodb.conf &>/tmp/mongo.log &",
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+  }->
+  exec { 'force jboss permissions':
+   command => "chown -R ${jboss_user}:${jboss_group} ${jboss_home}",
+   require => Exec['strip']
+   notify=> Service['jboss-as'],
   }->
 
   exec { 'Network':
