@@ -43,8 +43,8 @@ node default {
 
 ## from mongo repository (2.6)
   exec { 'mongo repo':
-    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | sudo tee  /etc/yum.repos.d/mongodb.repo',
-    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    command => 'echo -e "[mongodb]\nname=MongoDB Repository\nbaseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/\ngpgcheck=0\nenabled=1" | tee  /etc/yum.repos.d/mongodb.repo',
+    path    => ['/usr/bin', '/bin'],
   }->
  
   package {'mongodb-org': ensure => installed, } ->
@@ -122,7 +122,7 @@ node default {
 
   exec { 'config mongodb.conf: smallfiles':
     command => "echo 'smallfiles = true' | tee -a /etc/mongodb.conf",
-    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
+    path    => ['/usr/bin', '/bin' ],
     unless  => "grep --quiet smallfiles /etc/mongodb.conf 2>/dev/null"
   }->
 
