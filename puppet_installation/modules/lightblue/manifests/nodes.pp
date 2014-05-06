@@ -118,6 +118,7 @@ node default {
    owner              => 'jboss-as',
    group              => 'jboss-as',
    content            => template('lightblue/datasources.json.erb'),
+   notify=> Service['jboss-as'],
   }->
 
   exec { 'config mongodb.conf: smallfiles':
