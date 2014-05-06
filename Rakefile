@@ -97,7 +97,7 @@ task :create_ec2 do
     :security_groups => security_group, 
     :key_pair => ec2.key_pairs[key_pair]) 
 
-  puts "Requested to AWS for an instance and it is provision it"
+  puts "Requested to AWS for an instance and it is provisioning it"
 
   sleep 10 while i.status == :pending
 
