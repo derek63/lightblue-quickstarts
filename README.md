@@ -22,6 +22,8 @@ EC2 instance creation and configuration script
 
 The wizard\_puppet.sh script will also get the necessary dependencies to programmably manage your AWS account, just need to provide the Access Keys ([this blog post might help](http://www.cloudberrylab.com/blog/how-to-find-your-aws-access-key-id-and-secret-access-key-and-register-with-cloudberry-s3-explorer/) or inother case, take a look at [Security Credentials tab in the Users page](https://console.aws.amazon.com/iam/home?#users) and create your Access Key).
 
+But to create the EC2 instance, run "rake create\_ec2" command (which will ask for the credentials and for the PEM Key name).
+
 
 Scripts for understanting and testing
 -------------------------------------
