@@ -79,7 +79,7 @@ task :create_ec2 do
   secret = ENV['SECRET_ACCESS_KEY']
   key_pair = ENV['MY_KEY_PAIR_NAME'] 
   #optional
-  region  = ENV['REGION'] || "us-west-2"
+  region  = ENV['REGION'] || "us-east-1"
   image  = ENV['IMAGE_ID'] || "ami-b8a63b88"
   instance_type = ENV['INSTANCE_TYPE'] || "m3.medium"
   security_group = ENV['SECURITY_GROUP'] || "Lightblue"
