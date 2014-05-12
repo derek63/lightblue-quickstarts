@@ -27,7 +27,8 @@ rm cookies.txt
 
 curl -o maven.zip http://www.us.apache.org/dist/maven/maven-3/3.2.1/binaries/apache-maven-3.2.1-bin.zip
 
-curl -o mongodb.tgz http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz 
+curl -o mongodb.tgz https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.1.tgz
+#oldcurl -o mongodb.tgz http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.4.9.tgz 
 #we can change to install using yum -> http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/
 
 sudo yum install -q -y git java-1.7.0-openjdk-devel.x86_64 @development-tools rpm-build
