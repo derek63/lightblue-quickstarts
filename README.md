@@ -13,10 +13,24 @@ The wizard\_puppet.sh script will first install the necessary packages and ask t
 
 For puppet modifications, you probably would want to run 'rake add\_hooks' to add a hook into the git repository to check your scripts before any commit.
 
+
 Shell script installation option 
 --------------------------------
 
 There is also the single bash script that may help you with the installation. It requires you to access the machine (using the SSH for example) and run it.
+
+Below a list of commadns to make it easier for remote servers:
+Note: use " cat README.md | fgrep X.X.X.X | sed -e 's/X\.X\.X\.X/IP/g' " to replace the IP of all commands and output into your terminal.
+
+```Bash
+ssh -i PATH/KEY.pem ec2-user@X.X.X.X
+```
+```Bash
+scp -i PATH/KEY.pem PATH2/lightblue-quickstarts/script_installation/setup.sh ec2-user@X.X.X.X:/home/ec2-user
+```
+```Bash
+ssh -t -i  PATH/KEY.pem ec2-user@X.X.X.X  /home/ec2-user/setup.sh
+```
 
 
 EC2 instance creation and configuration script
@@ -25,6 +39,8 @@ EC2 instance creation and configuration script
 The wizard\_puppet.sh script will also get the necessary dependencies to programmably manage your AWS account, just need to provide the Access Keys ([this blog post might help](http://www.cloudberrylab.com/blog/how-to-find-your-aws-access-key-id-and-secret-access-key-and-register-with-cloudberry-s3-explorer/) or inother case, take a look at [Security Credentials tab in the Users page](https://console.aws.amazon.com/iam/home?#users) and create your Access Key).
 
 But to create the EC2 instance, run "rake create\_ec2" command (which will ask for the credentials and for the PEM Key name).
+
+Note: remember to run the following command with the right value before that rake task "export MY\_KEY\_PAIR\_NAME=X  && export ACCESS\_KEY\_ID=Y  && export SECRET\_ACCESS\_KEY=Z"
 
 
 Scripts for understanting and testing
