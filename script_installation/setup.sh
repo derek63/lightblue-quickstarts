@@ -82,8 +82,10 @@ sudo iptables -L | grep --quiet 'tcp dpt:webcache'
 test $? -eq 1 && sudo iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
 sed -i  's/address:127\.0\.0\.1/address:0.0.0.0/g' ~/jboss-eap-6.2/standalone/configuration/standalone.xml
 
+#tried https://stackoverflow.com/questions/4113168/starting-remote-script-via-ssh-containing-nohup  https://stackoverflow.com/questions/1628204/how-to-run-a-command-in-background-using-ssh-and-detach-the-session   http://serverfault.com/questions/76875/how-to-run-script-via-ssh-that-doesnt-end-when-i-close-connection http://askubuntu.com/questions/349262/run-a-nohup-command-over-ssh-then-disconnect  https://superuser.com/questions/632205/continue-ssh-background-task-jobs-when-closing-ssh https://unix.stackexchange.com/questions/75182/how-to-run-ssh-t-userremote-sudo-nohup-bash-c-comand-in-background  
+#if you aren't using ssh to login and run this script (for example, using ssh to remotely run the script) the JBoss and MongoDB will not work due TTY problem
 #Starting MongoDB
-nohup ~/mongodb-linux-x86_64-2.4.9/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1 &
+nohup ~/mongodb-linux-x86_64-2.6.1/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1 &
 
 #Start JBoss
 nohup ~/jboss-eap-6.2/bin/standalone.sh & >/dev/null 2>&1 &

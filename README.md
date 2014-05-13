@@ -19,7 +19,7 @@ Shell script installation option
 
 There is also the single bash script that may help you with the installation. It requires you to access the machine (using the SSH for example) and run it.
 
-Below a list of commadns to make it easier for remote servers:
+Below a list of commadns to make it easier for remote servers (for instllation only, it will need to start then the JBoss and MongoDB process due nohup/ssh problem with TTY):
 Note: use " cat README.md | fgrep X.X.X.X | sed -e 's/X\.X\.X\.X/IP/g' " to replace the IP of all commands and output into your terminal.
 
 ```Bash
