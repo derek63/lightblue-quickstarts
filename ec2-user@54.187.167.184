@@ -77,11 +77,6 @@ cp ~/lightblue/rest/metadata/target/rest-metadata* ~/jboss-eap-6.2/standalone/de
 #Create directory for Mongo data files
 mkdir ~/lbdata
 
-#Open the 8080 port to the incomming request (but it also need that the Security Group's rules are set accordingly
-sudo iptables -L | grep --quiet 'tcp dpt:webcache'
-test $? -eq 1 && sudo iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
-sed -i  's/address:127\.0\.0\.1/address:0.0.0.0/g' ~/jboss-eap-6.2/standalone/configuration/standalone.xml
-
 #Starting MongoDB
 nohup ~/mongodb-linux-x86_64-2.4.9/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1 &
 
