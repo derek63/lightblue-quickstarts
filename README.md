@@ -52,7 +52,7 @@ Under the demo\_scripts directory there are scripts to test lightblue. [See more
 
 Other Useful Information
 ------------------------
-There are two PDFs in this in the [static\_files](blob/master/static_files/) diretory. One is the [AWS Access Key.pdf](blob/master/static_files/AWS Access Key.pdf), which is an illustrative guide how to get the Access Key cited here. The other PDF is a more basic tutorial about setup the basic configuration on your AWS web console, it is named [AWS - Manually creating EC2 instances for Lightblue.pdf](blob/master/static_files/AWS - Manually creating EC2 instances for Lightblue.pdf) .
+There are two PDFs in this in the [static\_files](/tree/master/static_files/) diretory. One is the [AWS Access Key.pdf](/raw/master/static_files/AWS Access Key.pdf), which is an illustrative guide how to get the Access Key cited here. The other PDF is a more basic tutorial about setup the basic configuration on your AWS web console, it is named [AWS - Manually creating EC2 instances for Lightblue.pdf](/raw/master/static_files/AWS - Manually creating EC2 instances for Lightblue.pdf) .
 
 
 # License
