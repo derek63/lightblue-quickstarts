@@ -82,13 +82,21 @@ sudo iptables -L | grep --quiet 'tcp dpt:webcache'
 test $? -eq 1 && sudo iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT
 sed -i  's/address:127\.0\.0\.1/address:0.0.0.0/g' ~/jboss-eap-6.2/standalone/configuration/standalone.xml
 
+
+#Workaround for the TTY/SSH/NOHUP/SCREEN/disown problem
+LD_Y=$(date --date='1 minute 5 seconds' '+%Y')
+LD_DW='*'
+LD_M=$(date --date='1 minute 5 seconds' '+%m')
+LD_D=$(date --date='1 minute 5 seconds' '+%d')
+LD_H=$(date --date='1 minute 5 seconds' '+%H')
+LD_MM=$(date --date='1 minute 5 seconds' '+%MM'| sed s/M//)
+
 #tried https://stackoverflow.com/questions/4113168/starting-remote-script-via-ssh-containing-nohup  https://stackoverflow.com/questions/1628204/how-to-run-a-command-in-background-using-ssh-and-detach-the-session   http://serverfault.com/questions/76875/how-to-run-script-via-ssh-that-doesnt-end-when-i-close-connection http://askubuntu.com/questions/349262/run-a-nohup-command-over-ssh-then-disconnect  https://superuser.com/questions/632205/continue-ssh-background-task-jobs-when-closing-ssh https://unix.stackexchange.com/questions/75182/how-to-run-ssh-t-userremote-sudo-nohup-bash-c-comand-in-background  
-#if you aren't using ssh to login and run this script (for example, using ssh to remotely run the script) the JBoss and MongoDB will not work due TTY problem
 #Starting MongoDB
-nohup ~/mongodb-linux-x86_64-2.6.1/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1 &
+crontab -l |fgrep -v crontab | { cat; echo "$LD_MM $LD_H $LD_D $LD_M $LD_DW test `/bin/date +%Y` == $LD_Y && ~/mongodb-linux-x86_64-2.6.1/bin/mongod --dbpath ~/lbdata --smallfiles -logpath ~/lbdata/mongo.out >/dev/null 2>&1"; }  | crontab -
 
 #Start JBoss
-nohup ~/jboss-eap-6.2/bin/standalone.sh & >/dev/null 2>&1 &
+crontab -l |fgrep -v crontab | { cat; echo "$LD_MM $LD_H $LD_D $LD_M $LD_DW test `/bin/date +%Y` == $LD_Y && ~/jboss-eap-6.2/bin/standalone.sh & >/dev/null 2>&1 "; }  | crontab -
 
-echo "Installation complete, Lightblue REST Services should be available at http://localhost:8080/metadata and http://localhost:8080/data"
+echo "Installation complete, Lightblue REST Services should be available at http://localhost:8080/metadata and http://localhost:8080/data (or other interfaces like public IP if avaialable)
 echo "You may also run ' source /etc/profile.d/maven.sh ' to set enviroment variables without restarting"
