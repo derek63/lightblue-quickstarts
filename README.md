@@ -50,6 +50,11 @@ Scripts for understanting and testing
 Under the demo\_scripts directory there are scripts to test lightblue. [See more examples in the demo folder of the core project](https://github.com/lightblue-platform/lightblue/tree/master/docs/demo) (which uses [shakespeares-monkey](https://github.com/lightblue-platform/shakespeares-monkey)).
 
 
+Other Useful Information
+------------------------
+There are two PDFs in this in the [static\_files](blob/master/static_files/) diretory. One is the [AWS Access Key.pdf](blob/master/static_files/AWS Access Key.pdf), which is an illustrative guide how to get the Access Key cited here. The other PDF is a more basic tutorial about setup the basic configuration on your AWS web console, it is named [AWS - Manually creating EC2 instances for Lightblue.pdf](blob/master/static_files/AWS - Manually creating EC2 instances for Lightblue.pdf) .
+
+
 # License
 
 The license of lightblue and its quickstarts are [GPLv3](https://www.gnu.org/licenses/gpl.html).  See COPYING in root of project for the full text.
