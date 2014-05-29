@@ -89,7 +89,7 @@ task :create_ec2 do
     :secret_access_key => secret,
     :region => region,
   })
-
+  ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
   i = ec2.instances.create(
     :image_id => image,
     :instance_type => instance_type,
@@ -100,7 +100,51 @@ task :create_ec2 do
   puts "Requested to AWS for an instance and it is provisioning it"
 
   sleep 10 while i.status == :pending
+  sleep 10 while i.status == :running
+
+  puts "Running! You can now ssh to it using:"
+  puts "ssh -i #{PATH_PEM_HOME} ec2-user@#{i.ip_address}"
 
   puts "Instance created with the public IP="+i.ip_address+" and with ID="+i.id
   puts "run 'export REMOTE_TARGET='"+i.ip_address+"' and then 'rake' to setup the enviroment in that machine"
+end
+
+desc "List EC2 instances"
+task :list_ec2 do
+  # Required fields
+  id = ENV['ACCESS_KEY_ID']
+  secret = ENV['SECRET_ACCESS_KEY']
+  key_pair = ENV['MY_KEY_PAIR_NAME'] 
+  #optional
+  region  = ENV['REGION'] || "us-east-1"
+  image  = ENV['IMAGE_ID'] || "ami-8d756fe4"
+  instance_type = ENV['INSTANCE_TYPE'] || "m3.medium"
+  security_group = ENV['SECURITY_GROUP'] || "Lightblue"
+
+  ec2 = AWS::EC2.new({
+    :access_key_id => id,
+    :secret_access_key => secret,
+    :region => region,
+  })
+  ec2.instances.each { |instance| puts "a #{instance.id} #{instance.ip_address} #{instance.status} " }
+end
+
+desc "Terminate all EC2 instances"
+task :terminate_all_ec2 do
+  # Required fields
+  id = ENV['ACCESS_KEY_ID']
+  secret = ENV['SECRET_ACCESS_KEY']
+  key_pair = ENV['MY_KEY_PAIR_NAME'] 
+  #optional
+  region  = ENV['REGION'] || "us-east-1"
+  image  = ENV['IMAGE_ID'] || "ami-8d756fe4"
+  instance_type = ENV['INSTANCE_TYPE'] || "m3.medium"
+  security_group = ENV['SECURITY_GROUP'] || "Lightblue"
+
+  ec2 = AWS::EC2.new({
+    :access_key_id => id,
+    :secret_access_key => secret,
+    :region => region,
+  })
+  ec2.instances.each { |instance| instance.terminate}
 end
