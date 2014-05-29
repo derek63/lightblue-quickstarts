@@ -4,8 +4,8 @@ Lightblue - Functional tests
 This document aims to give an overview of the tests
 
 
-How the functional tests works
--------------------------------------------------------
+How the functional tests will  be generated and placed here
+-----------------------------------------------------------
 
 You need to install http://gatling-tool.org/ in your machine and start the gatling’s recorder (which will be a simple proxy you need to inform you browser or system so the recorder will capture the HTTP(S) requests and turn them into test code). Then you can use any web tool you want (such as cURL, web browser, etc as the proxy is running and the system is configured). After recording the whole scenario, you can move it to this folder to make it available to everyone (and it is useful for Jenkins, for example)
 
