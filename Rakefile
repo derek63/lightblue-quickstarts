@@ -100,7 +100,6 @@ task :create_ec2 do
   puts "Requested to AWS for an instance and it is provisioning it"
 
   sleep 10 while i.status == :pending
-  sleep 10 while i.status == :running
 
   puts "Running! You can now ssh to it using:"
   puts "ssh -i #{PATH_PEM_HOME} ec2-user@#{i.ip_address}"

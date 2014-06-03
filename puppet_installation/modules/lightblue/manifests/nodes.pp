@@ -24,7 +24,7 @@ node default {
     jboss_dist     => 'eap.zip',
     jboss_user     => 'jboss-as',
     jboss_group    => 'jboss-as',
-    jboss_home     => '/usr/share/jboss',
+    jboss_home     => '/usr/share/jbossas',
     staging_dir    => '/tmp/puppet-staging/jboss_as',
     standalone_tpl => 'jboss_as/standalone.xml.erb',
     download       => true,
@@ -73,7 +73,7 @@ node default {
 
 #  class{'jboss_as::jbossmodule':
   jboss_as::jbossmodule{'Set jboss module directory':
-   jboss_home => '/usr/share/jboss',
+   jboss_home => '/usr/share/jbossas',
    moduledir  => 'com/redhat/lightblue',
    owner              => 'jboss-as',
    group              => 'jboss-as',
@@ -82,7 +82,7 @@ node default {
   #You may use variables (like $template_module_path in jbossmodule) to set dynamic content
 #  class{'jboss_as::jbossmodulefile':
   jboss_as::jbossmodulefile{'Set config.properties':
-   jboss_home         => '/usr/share/jboss',
+   jboss_home         => '/usr/share/jbossas',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'config.properties',
    owner              => 'jboss-as',
@@ -92,7 +92,7 @@ node default {
 
 #  class{'jboss_as::jbossmodulefile':
   jboss_as::jbossmodulefile{'Set lightblue-crud.json':
-   jboss_home         => '/usr/share/jboss',
+   jboss_home         => '/usr/share/jbossas',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'lightblue-crud.json',
    owner              => 'jboss-as',
@@ -102,7 +102,7 @@ node default {
 
 #  class{'jboss_as::jbossmodulefile':
   jboss_as::jbossmodulefile{'Set lightblue-metadata.json':
-   jboss_home         => '/usr/share/jboss',
+   jboss_home         => '/usr/share/jbossas',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'lightblue-metadata.json',
    owner              => 'jboss-as',
@@ -112,7 +112,7 @@ node default {
 
 #  class{'jboss_as::jbossmodulefile':
   jboss_as::jbossmodulefile{'Set datasources.json':
-   jboss_home         => '/usr/share/jboss',
+   jboss_home         => '/usr/share/jbossas',
    moduledir          => 'com/redhat/lightblue',
    configuration_file => 'datasources.json',
    owner              => 'jboss-as',
@@ -147,12 +147,12 @@ node default {
     path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
   }->
   exec { 'force jboss ACL':
-   command => "chmod 774 -R /usr/share/jboss/standalone/deployments",
+   command => "chmod 774 -R /usr/share/jbossas/standalone/deployments",
    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
    notify  => Service['jboss-as'],
   }->
   exec { 'force jboss ownership':
-   command => "chown -R jboss-as:jboss-as /usr/share/jboss",
+   command => "chown -R jboss-as:jboss-as /usr/share/jbossas",
    path    => ['/usr/bin', '/bin', '/sbin', '/usr/sbin'],
    notify  => Service['jboss-as'],
   }->
